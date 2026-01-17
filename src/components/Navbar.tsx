@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { SearchDialog } from './SearchDialog';
+import { AdminLoginModal } from './AdminLoginModal';
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -25,6 +26,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { user, isAdmin, signOut } = useAuth();
@@ -122,12 +124,14 @@ export function Navbar() {
             </DropdownMenu>
           ) : (
             <div className="flex items-center gap-2">
-              <Link to="/admin">
-                <Button variant="outline" size="sm">
-                  <Shield className="w-4 h-4 mr-1" />
-                  Admin
-                </Button>
-              </Link>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => setIsAdminLoginOpen(true)}
+              >
+                <Shield className="w-4 h-4 mr-1" />
+                Admin
+              </Button>
               <Link to="/auth">
                 <Button variant="hero" size="sm">
                   Sign In
@@ -200,12 +204,28 @@ export function Navbar() {
                 </Button>
               </Link>
             )}
+            {!user && (
+              <Button 
+                variant="outline" 
+                className="w-full mt-2 h-10 sm:h-11"
+                onClick={() => {
+                  setIsAdminLoginOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                <Shield className="w-4 h-4 mr-2" />
+                Admin Login
+              </Button>
+            )}
           </div>
         </div>
       )}
 
       {/* Search Dialog */}
       <SearchDialog open={isSearchOpen} onOpenChange={setIsSearchOpen} />
+
+      {/* Admin Login Modal */}
+      <AdminLoginModal open={isAdminLoginOpen} onOpenChange={setIsAdminLoginOpen} />
     </nav>
   );
 }
