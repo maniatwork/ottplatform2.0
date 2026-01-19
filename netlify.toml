@@ -5,18 +5,23 @@
 
 [build.environment]
   NODE_VERSION = "20"
-
-[context.production]
-  environment = { VITE_SUPABASE_URL = "", VITE_SUPABASE_PUBLISHABLE_KEY = "", VITE_SUPABASE_PROJECT_ID = "" }
+  # Environment variables will be read from Netlify UI settings
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
 [dev]
   command = "npm run dev"
   port = 3000
+  framework = "vite"
+  targetPort = 8080
 
 [[headers]]
   for = "/*"
