@@ -10,8 +10,10 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  publicDir: "public",
   build: {
     outDir: "dist",
+    emptyOutDir: true,
     sourcemap: mode === "development",
     rollupOptions: {
       output: {
