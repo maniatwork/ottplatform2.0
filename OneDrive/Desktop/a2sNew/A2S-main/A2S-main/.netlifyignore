@@ -1,0 +1,17 @@
+node_modules
+npm-debug.log
+dist
+.DS_Store
+.env.local
+.env.*.local
+*.pem
+.git
+.gitignore
+README.md
+.eslintrc.cjs
+tsconfig.json
+tsconfig.app.json
+tsconfig.node.json
+vite.config.ts
+package.json.orig
+supabase
